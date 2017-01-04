@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Hello Thymeleaf!</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+</head>
+<body>
+<div th:include="fragments/header"></div>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Birthday</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+        <tr th:each="person,iterationStatus : ${persons}">
+            <td th:text="${iterationStatus.count}">1</td>
+            <td th:text="${person.firstName}"></td>
+            <td th:text="${person.lastName}"></td>
+            <td th:text="${person.birthday}"></td>
+            <td th:text="${person.age}"></td>
+        </tr>
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

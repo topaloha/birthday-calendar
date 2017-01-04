@@ -1,43 +1,44 @@
 package app.domain;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
-@Table(name = "users")
+@Table(name = "persons")
 public class Person {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private String birthday;
-	private String name;
+	private Date birthday;
+	private String firstName;
 	private String lastName;
-	private String age;
+	private Integer age;
 
 
 	public Person() {}
 
-	public Person(String birthday, String name, String lastName, String age) {
+	public Person(Date birthday, String firstName, String lastName, Integer age) {
 		this.birthday = birthday;
-		this.name = name;
+		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 	}
 
-	public String getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
@@ -48,11 +49,11 @@ public class Person {
 		this.lastName = lastName;
 	}
 
-	public String getAge() {
+	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(String age) {
+	public void setAge(Integer age) {
 		this.age = age;
 	}
 }
