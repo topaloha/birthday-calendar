@@ -25,6 +25,8 @@ public class PersonController {
 	@RequestMapping("/")
 	public String index(Model model) {
 		model.addAttribute("persons", userDao.getAll());
+		model.addAttribute("prop", "RequestProperties");
+
 		return "main";
 	}
 
