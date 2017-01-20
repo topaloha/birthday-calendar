@@ -1,6 +1,6 @@
 package app.models;
 
-		import app.domain.Person;
+		import app.domain.BirthdayEntry;
 		import org.springframework.stereotype.Repository;
 		import org.springframework.transaction.annotation.Transactional;
 
@@ -10,17 +10,21 @@ package app.models;
 
 @Transactional
 @Repository
-public class UserDao {
+public class BirthdayEntryDao {
 
 	@PersistenceContext
 	private EntityManager entityManager;
 
-	public void create(Person person) {
-		entityManager.persist(person);
+	public void create(BirthdayEntry birthdayEntry) {
+		entityManager.persist(birthdayEntry);
 	}
 
 	public List getAll() {
-		return entityManager.createQuery("from Person").getResultList();
+		return entityManager.createQuery("from BirthdayEntry").getResultList();
+	}
+
+	public void createEntry(BirthdayEntry birthdayEntry) {
+		entityManager.persist(birthdayEntry);
 	}
 
 }

@@ -1,35 +1,36 @@
 package app.domain;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
-@Table(name = "persons")
-public class Person {
+@Table(name = "birthday_entry")
+public class BirthdayEntry implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private Date birthday;
+	private LocalDate birthday;
 	private String firstName;
 	private String lastName;
 	private Integer age;
 
+	public BirthdayEntry() {}
 
-	public Person() {}
-
-	public Person(Date birthday, String firstName, String lastName, Integer age) {
+	public BirthdayEntry(LocalDate birthday, String firstName, String lastName, Integer age) {
 		this.birthday = birthday;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 	}
 
-	public Date getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 
@@ -55,5 +56,16 @@ public class Person {
 
 	public void setAge(Integer age) {
 		this.age = age;
+	}
+
+	@Override
+	public String toString() {
+		return "BirthdayEntry{" +
+				"id=" + id +
+				", birthday=" + birthday +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", age=" + age +
+				'}';
 	}
 }

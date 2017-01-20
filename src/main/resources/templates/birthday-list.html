@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>№</th>
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Birthday</th>
+        <th>Age</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="birthdayEntry,iterationStatus : ${persons}">
+        <td th:text="${iterationStatus.count}">1</td>
+        <td th:text="${birthdayEntry.firstName}"></td>
+        <td th:text="${birthdayEntry.lastName}"></td>
+        <td th:text="${birthdayEntry.birthday}"></td>
+        <td th:text="${birthdayEntry.age}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<div>
+    <a href="/createBirthdayEntry">Add birthday entry</a>
+</div>

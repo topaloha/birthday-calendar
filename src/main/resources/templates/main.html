@@ -8,29 +8,10 @@
 </head>
 <body>
 
-<header class="container-fluid" th:include="fragments/header"></header>
+<header class="container-fluid white-text" th:include="fragments/header"></header>
 
 <div class="container">
-    <table class="table table-bordered">
-        <thead>
-        <tr>
-            <th>№</th>
-            <th>FirstName</th>
-            <th>LastName</th>
-            <th>Birthday</th>
-            <th>Age</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="person,iterationStatus : ${persons}">
-            <td th:text="${iterationStatus.count}">1</td>
-            <td th:text="${person.firstName}"></td>
-            <td th:text="${person.lastName}"></td>
-            <td th:text="${person.birthday}"></td>
-            <td th:text="${person.age}"></td>
-        </tr>
-        </tbody>
-    </table>
+   <div th:include="${viewName}"></div>
 </div>
 
 <footer class="container-fluid" th:include="fragments/footer"></footer>
