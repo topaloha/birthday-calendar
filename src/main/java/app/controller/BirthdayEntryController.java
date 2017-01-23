@@ -33,6 +33,7 @@ public class BirthdayEntryController {
 		model.addAttribute("persons", birthdayEntryDao.getAll());
 		model.addAttribute("prop", "RequestProperties");
 		model.addAttribute("viewName", "birthday-list");
+		model.addAttribute("entry", new BirthdayEntryDto());
 
 		return "main";
 	}
@@ -45,12 +46,18 @@ public class BirthdayEntryController {
 		return "main";
 	}
 
-	@PostMapping(value = "/createBirthdayEntry")
+	@PostMapping(value = "/birthdays")
 	public String saveBirthdayEntry(@ModelAttribute BirthdayEntryDto entry) {
 		BirthdayEntry birthdayEntry = BirthdayEntryBuilder.aBirthdayEntry()
 													.withDataFromDto(entry)
 													.build();
 		birthdayEntryDao.createEntry(birthdayEntry);
+		return "redirect:/";
+	}
+
+	@PostMapping(value = "/deleteBirthdayEntry")
+	public String deleteBirthdayEntry(@ModelAttribute BirthdayEntryDto entry) {
+		birthdayEntryDao.deleteEntryById(entry.getId());
 		return "redirect:/";
 	}
 

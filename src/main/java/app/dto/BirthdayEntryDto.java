@@ -5,6 +5,7 @@ public class BirthdayEntryDto {
 	private String lastName;
 	private String birthday;
 	private int age;
+	private long id;
 
 	public String getFirstName() {
 		return firstName;
@@ -36,5 +37,13 @@ public class BirthdayEntryDto {
 
 	public void setAge(int age) {
 		this.age = age;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 }
