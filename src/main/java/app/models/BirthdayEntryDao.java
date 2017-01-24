@@ -18,6 +18,8 @@ import java.util.List;
 public class BirthdayEntryDao {
 
 	private static Logger logger = LoggerFactory.getLogger(BirthdayEntryDao.class);
+	private static String UPDATE_BIRTHDAY_ENTRY_QUERY = "update BirthdayEntry b set b.birthday= :birthday," +
+			"                                                b.firstName=:firstName, b.lastName=:lastName";
 
 	@PersistenceContext
 	private EntityManager entityManager;
@@ -40,5 +42,20 @@ public class BirthdayEntryDao {
 		Query deleteQuery = entityManager.createQuery("delete from BirthdayEntry b where b.id = :id");
 		deleteQuery.setParameter("id", id);
 		deleteQuery.executeUpdate();
+	}
+
+	public BirthdayEntry getEntryById(long id) {
+		Query findByIdQuery = entityManager.createQuery("from BirthdayEntry b where b.id = :id");
+		findByIdQuery.setParameter("id", id);
+		return (BirthdayEntry) findByIdQuery.getSingleResult();
+	}
+
+	public void updateEntity(BirthdayEntry birthdayEntry) {
+		Query updateQuery = entityManager.createQuery(UPDATE_BIRTHDAY_ENTRY_QUERY);
+		updateQuery.setParameter("birthday", birthdayEntry.getBirthday());
+		updateQuery.setParameter("firstName", birthdayEntry.getFirstName());
+		updateQuery.setParameter("lastName", birthdayEntry.getLastName());
+		updateQuery.executeUpdate();
+
 	}
 }

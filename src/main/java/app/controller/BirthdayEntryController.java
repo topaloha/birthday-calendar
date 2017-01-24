@@ -61,4 +61,28 @@ public class BirthdayEntryController {
 		return "redirect:/";
 	}
 
+	@GetMapping(value = "update-birthday-entry")
+	public String updateBirthdayEntryView(Model model, @RequestParam("id") long id) {
+		logger.info(">>>>>: {}", id);
+		BirthdayEntry birthdayEntry = birthdayEntryDao.getEntryById(id);
+		logger.info(">>>>: {}", birthdayEntry);
+
+
+		model.addAttribute("entry", new BirthdayEntryDto(birthdayEntry));
+		model.addAttribute("viewName", "update-birthday-list");
+
+		return "main";
+	}
+
+	@PostMapping(value = "perform-update")
+	public String updateBirthdayEntry(@ModelAttribute BirthdayEntryDto entry, Model model) {
+		BirthdayEntry birthdayEntry = BirthdayEntryBuilder.aBirthdayEntry()
+											.withDataFromDto(entry)
+											.build();
+
+		birthdayEntryDao.updateEntity(birthdayEntry);
+
+		return "redirect:/";
+	}
+
 }

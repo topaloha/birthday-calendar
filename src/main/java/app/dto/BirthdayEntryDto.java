@@ -1,11 +1,34 @@
 package app.dto;
 
-public class BirthdayEntryDto {
+import app.domain.BirthdayEntry;
+
+import java.io.Serializable;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+
+public class BirthdayEntryDto implements Serializable {
 	private String firstName;
 	private String lastName;
 	private String birthday;
 	private int age;
 	private long id;
+
+	public BirthdayEntryDto(String firstName, String lastName, String birthday, int age, long id) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.birthday = birthday;
+		this.age = age;
+		this.id = id;
+	}
+
+	public BirthdayEntryDto(){}
+
+	public BirthdayEntryDto(BirthdayEntry birthdayEntry) {
+		this.firstName = birthdayEntry.getFirstName();
+		this.lastName = birthdayEntry.getLastName();
+		this.birthday = birthdayEntry.getBirthday().format(DateTimeFormatter.ISO_DATE);
+
+	}
 
 	public String getFirstName() {
 		return firstName;
@@ -45,5 +68,16 @@ public class BirthdayEntryDto {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	@Override
+	public String toString() {
+		return "BirthdayEntryDto{" +
+				"firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", birthday='" + birthday + '\'' +
+				", age=" + age +
+				", id=" + id +
+				'}';
 	}
 }

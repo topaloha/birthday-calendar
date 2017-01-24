@@ -1,4 +1,4 @@
-<form method="post"  th:object="${entry}">
+<form   th:object="${entry}">
 <table class="table table-bordered">
     <thead>
     <tr>
@@ -13,7 +13,7 @@
     <tbody>
     <tr th:each="birthdayEntry,iterationStatus : ${persons}">
         <td th:text="${iterationStatus.count}">1</td>
-        <td><input th:type="'radio'" th:checked="'unchecked'" th:name="'id'" th:value="${birthdayEntry.id}" th:field="*{id}" /></td>
+        <td><input th:type="'radio'" th:checked="'unchecked'" th:name="'id'" th:value="${birthdayEntry.id}" /></td>
         <td th:text="${birthdayEntry.firstName}"></td>
         <td th:text="${birthdayEntry.lastName}"></td>
         <td th:text="${birthdayEntry.birthday}"></td>
@@ -23,8 +23,8 @@
 </table>
 
     <div>
-        <button th:class="'btn primary'" th:formaction="@{deleteBirthdayEntry}" th:type="'submit'">Remove entry</button>
-        <button th:class="'btn primary'" th:formaction="@{editBirthdayEntry}">Edit entry</button>
+        <button th:class="'btn primary'" formmethod="post" th:formaction="@{deleteBirthdayEntry}" th:type="'submit'">Remove entry</button>
+        <button th:class="'btn primary'" formmethod="get" th:formaction="@{update-birthday-entry}">Edit entry</button>
     </div>
 </form>
 
