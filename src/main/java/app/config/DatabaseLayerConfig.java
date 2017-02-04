@@ -1,6 +1,8 @@
 package app.config;
 
+import app.config.datasource.DataSourceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -16,29 +18,21 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource("db.properties")
 @EnableTransactionManagement
-public class DatabaseConfig {
+@PropertySource("classpath:/application-${spring.profiles.active}.properties")
+public class DatabaseLayerConfig {
 
 	@Autowired
 	private Environment env;
+	@Autowired
+	private DataSourceConfig dataSourceConfig;
 
 	@Bean
-	public DataSource dataSource() {
-		DriverManagerDataSource dataSource = new DriverManagerDataSource();
-		dataSource.setDriverClassName(env.getProperty("mysql.driver"));
-		dataSource.setUrl(env.getProperty("mysql.url"));
-		dataSource.setUsername(env.getProperty("mysql.username"));
-		dataSource.setPassword(env.getProperty("mysql.password"));
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 
-		return dataSource;
-	}
-
-	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
 		LocalContainerEntityManagerFactoryBean  entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 
-		entityManagerFactoryBean.setDataSource(dataSource);
+		entityManagerFactoryBean.setDataSource(dataSourceConfig.dataSource());
 
 		entityManagerFactoryBean.setPackagesToScan(env.getProperty("entitymanager.packagesToScan"));
 
