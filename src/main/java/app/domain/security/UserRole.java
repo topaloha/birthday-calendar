@@ -3,7 +3,7 @@ package app.domain.security;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_roles", catalog="test", uniqueConstraints = @UniqueConstraint(
+@Table(name = "user_roles", uniqueConstraints = @UniqueConstraint(
 		columnNames = {"role", "username"}))
 public class UserRole {
 	@Id

@@ -17,7 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-@Service
+@Service(value = "userDetailsService")
 public class DefaultUserDetailService implements UserDetailsService {
 	@Autowired
 	private UserDao userDao;
@@ -26,14 +26,16 @@ public class DefaultUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userDao.findByUserName(username);
-		List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
 
-		return buildUserForAuthentication(user, authorities);
+		if (user != null) {
+			List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
+
+			return buildUserForAuthentication(user, authorities);
+		}
+
+		return null;
 	}
 
-
-	// Converts com.mkyong.users.model.User user to
-	// org.springframework.security.core.userdetails.User
 	private org.springframework.security.core.userdetails.User buildUserForAuthentication(User user,
 	                                        List<GrantedAuthority> authorities) {
 		return new org.springframework.security.core.userdetails.User(user.getUserName(), user.getPassword(),

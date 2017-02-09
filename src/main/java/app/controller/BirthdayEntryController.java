@@ -38,6 +38,11 @@ public class BirthdayEntryController {
 		return "main";
 	}
 
+	@PostMapping("/")
+	public String indexPOST() {
+		return "redirect:/";
+	}
+
 	@GetMapping(value = "/createBirthdayEntry")
 	public String createBirthdayEntry(Model model) {
 		model.addAttribute("viewName", "create-birthday-entry");
