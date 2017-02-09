@@ -31,7 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/").authenticated();
 				http.formLogin()
 				.loginPage("/login").failureUrl("/login?error")
-				.successForwardUrl("/")
 				.usernameParameter("login")
 				.passwordParameter("password")
 				.and().logout().logoutSuccessUrl("/login?logout")
